@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodieHub - Online Food Ordering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--orange:#f15a24;--dark:#252525;--cream:#fff8f0}
+body{font-family:Arial,sans-serif;background:#fff;color:var(--dark)}
+header{background:white;padding:18px 7%;display:flex;
+justify-content:space-between;align-items:center;gap:15px;
+position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #0001}
+.logo{font-size:27px;font-weight:bold;color:var(--orange)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{text-decoration:none;color:#333;font-weight:600}
+button{cursor:pointer;border:0;border-radius:8px;padding:12px 18px;
+background:var(--orange);color:white;font-weight:bold}
+.hero{padding:65px 7%;background:linear-gradient(110deg,#fff0dd,#ffe1c5);
+display:flex;align-items:center;justify-content:space-between;gap:30px}
+.hero h1{font-size:clamp(35px,5vw,58px);margin-bottom:18px}
+.hero h1 span{color:var(--orange)}
+.hero p{line-height:1.8;color:#555;margin-bottom:22px}
+.hero img{width:45%;max-height:340px;object-fit:cover;border-radius:25px}
+section{padding:48px 7%}
+.heading{text-align:center;margin-bottom:28px}
+.heading h2{font-size:32px;margin-bottom:9px}
+.heading p{color:#777}
+.search{display:block;width:min(500px,100%);margin:0 auto 28px;
+padding:14px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+.categories{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.categories button{background:#fff0e8;color:#333;border:1px solid #ffdac9}
+.categories button.active,.categories button:hover{background:var(--orange);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card{border:1px solid #eee;border-radius:16px;overflow:hidden;
+box-shadow:0 5px 18px #0000000b;transition:.2s;background:white}
+.card:hover{transform:translateY(-4px);box-shadow:0 9px 25px #00000014}
+.card img{width:100%;height:190px;object-fit:cover}
+.card-content{padding:18px}
+.card-content h3{margin-bottom:9px}
+.card-content p{color:#777;font-size:14px;line-height:1.5}
+.price-row{display:flex;justify-content:space-between;align-items:center;
+margin-top:17px;gap:8px}
+.price{font-size:20px;font-weight:bold;color:var(--orange)}
+.offer{background:#fff2e8}
+.offer-box{background:var(--orange);color:white;padding:28px;
+border-radius:18px;text-align:center}
+.offer-box h2{font-size:30px;margin-bottom:12px}
+.offer-box p{margin-bottom:15px;line-height:1.6}
+.offer-box button{background:white;color:var(--orange)}
+.reviews{background:var(--cream)}
+.review{padding:22px;background:white;border-radius:14px;line-height:1.7}
+.stars{color:#efa900;margin:8px 0}
+.restaurant{text-align:center;line-height:2}
+footer{background:#222;color:white;padding:35px 7%;text-align:center;line-height:2}
+.cart-bar{position:fixed;bottom:0;left:0;width:100%;background:#222;
+color:white;padding:14px 7%;display:flex;justify-content:space-between;
+align-items:center;z-index:20;gap:12px}
+.cart-bar button{background:#ff7848}
+#cartDetails{background:white;padding:20px;border-radius:12px;
+margin:15px auto;max-width:700px;display:none;box-shadow:0 2px 15px #0002}
+#cartDetails button{margin:5px}
+.cart-item{display:flex;justify-content:space-between;gap:12px;
+padding:10px 0;border-bottom:1px solid #eee}
+main{padding-bottom:75px}
+@media(max-width:800px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{flex-direction:column;text-align:center}
+ .hero img{width:100%;max-height:260px}
+ header{padding:15px 5%;flex-wrap:wrap}
+ nav{gap:12px;flex-wrap:wrap;font-size:14px}
+}
+@media(max-width:520px){
+ .grid{grid-template-columns:1fr}
+ section{padding:35px 5%}
+ .hero{padding:45px 5%}
+ .heading h2{font-size:26px}
+ .card img{height:220px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">🍔 FoodieHub</div>
+ <nav>
+  <a href="#home">Home</a>
+  <a href="#menu">Menu</a>
+  <a href="#offers">Offers</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#contact">Contact</a>
+  <button onclick="showCart()">🛒 Cart (<span id="count">0</span>)</button>
+ </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+ <div>
+  <h1>Delicious Food,<br><span>Delivered Fast!</span></h1>
+  <p>Discover your favourite meals, explore amazing flavours, and
+  order delicious food from the comfort of your home.</p>
+  <a href="#menu"><button>Explore Menu →</button></a>
+ </div>
+ <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+ alt="Freshly prepared pizza">
+</section>
+
+<section>
+ <div class="heading">
+  <h2>Why Choose FoodieHub?</h2>
+  <p>Your happiness is our favourite recipe.</p>
+ </div>
+ <div class="grid">
+  <div class="card card-content">
+   <h3>🚀 Quick Delivery</h3>
+   <p>Enjoy convenient food ordering and delivery updates.</p>
+  </div>
+  <div class="card card-content">
+   <h3>🥗 Fresh Ingredients</h3>
+   <p>Discover meals prepared with care and flavour.</p>
+  </div>
+  <div class="card card-content">
+   <h3>💳 Easy Ordering</h3>
+   <p>Choose your dishes and review your cart in seconds.</p>
+  </div>
+ </div>
+</section>
+
+<section id="menu">
+ <div class="heading">
+  <h2>Explore Our Menu 🍽️</h2>
+  <p>Find the perfect meal for every craving.</p>
+ </div>
+ <input class="search" id="search" placeholder="🔍 Search your favourite food..."
+ oninput="renderMenu()">
+ <div class="categories">
+  <button class="active" onclick="setCategory('All',this)">All</button>
+  <button onclick="setCategory('Pizza',this)">🍕 Pizza</button>
+  <button onclick="setCategory('Burger',this)">🍔 Burgers</button>
+  <button onclick="setCategory('Indian',this)">🍛 Indian</button>
+  <button onclick="setCategory('Dessert',this)">🍰 Desserts</button>
+  <button onclick="setCategory('Drinks',this)">🥤 Drinks</button>
+ </div>
+ <div class="grid" id="foodGrid" style="margin-top:28px"></div>
+</section>
+
+<section class="offer" id="offers">
+ <div class="offer-box">
+  <h2>🎉 Special Food Offers!</h2>
+  <p>Use code <strong>WELCOME10</strong> to get 10% off
+  your cart. Maximum discount ₹100.</p>
+  <button onclick="applyOffer()">Apply Offer</button>
+  <p id="offerMessage" style="margin-top:12px"></p>
+ </div>
+</section>
+
+<section id="reviews" class="reviews">
+ <div class="heading">
+  <h2>What Our Customers Say ⭐</h2>
+  <p>Sample reviews for this website demonstration.</p>
+ </div>
+ <div class="grid">
+  <div class="review">
+   <h3>Priya S.</h3><div class="stars">★★★★★</div>
+   "The menu is easy to browse, and ordering is simple!"
+  </div>
+  <div class="review">
+   <h3>Rahul K.</h3><div class="stars">★★★★★</div>
+   "Great variety of food choices and a lovely interface."
+  </div>
+  <div class="review">
+   <h3>Ananya R.</h3><div class="stars">★★★★☆</div>
+   "I love the food categories and special offers."
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="heading">
+  <h2>Restaurant Information</h2>
+  <p>Everything you need to know before ordering.</p>
+ </div>
+ <div class="restaurant">
+  <h3>🍴 FoodieHub Restaurant</h3>
+  <p>📍 Vijayawada, Andhra Pradesh</p>
+  <p>🕒 Sample hours: 10:00 AM – 10:00 PM</p>
+  <p>⭐ Customer rating: 4.8/5 (demonstration rating)</p>
+  <p>📞 Contact: Add your restaurant phone number</p>
+ </div>
+</section>
+
+<div id="cartDetails"></div>
+</main>
+ <p>Good food, great mood!</p>
+ <p>© 2026 FoodieHub.SAI GEETHIKA VARMA GODEM demonstration project.</p>
+<footer>
+ <h2>🍔 FoodieHub</h2>
+<p>Menu, restaurant details, offers and reviews are sample content.</p>
+</footer>
+
+<div class="cart-bar">
+ <span>🛒 <strong id="cartSummary">0 items</strong> ·
+ ₹<strong id="total">0</strong></span>
+ <button onclick="showCart()">View Cart / Checkout →</button>
+</div>
+
+<script>
+const foods=[
+ {name:"Margherita Pizza",cat:"Pizza",price:249,emoji:"🍕",
+ desc:"Classic pizza with tomato, cheese and basil.",
+ img:"photo-1579751626657-72bc17010498"},
+ {name:"Veggie Supreme Pizza",cat:"Pizza",price:299,emoji:"🍕",
+ desc:"Loaded with colourful vegetables and cheese.",
+ img:"photo-1513104890138-7c749659a591"},
+ {name:"Classic Burger",cat:"Burger",price:149,emoji:"🍔",
+ desc:"Juicy patty, fresh lettuce and delicious sauce.",
+ img:"photo-1568901346375-23c9450c58cd"},
+ {name:"Crispy Veg Burger",cat:"Burger",price:129,emoji:"🍔",
+ desc:"Crunchy vegetable patty with creamy dressing.",
+ img:"photo-1550547660-d9450f859349"},
+ {name:"Hyderabadi Biryani",cat:"Indian",price:229,emoji:"🍛",
+ desc:"Fragrant spiced rice with traditional flavours.",
+ img:"photo-1563379091339-03246963d96c"},
+ {name:"Masala Dosa",cat:"Indian",price:99,emoji:"🥞",
+ desc:"Golden dosa served with chutney and sambar.",
+ img:"photo-1668236543090-82eba5ee5976"},
+ {name:"Chocolate Cake",cat:"Dessert",price:119,emoji:"🍰",
+ desc:"Rich chocolate cake for your sweet cravings.",
+ img:"photo-1578985545062-69928b1d9587"},
+ {name:"Ice Cream Sundae",cat:"Dessert",price:89,emoji:"🍨",
+ desc:"A creamy, delightful frozen dessert.",
+ img:"photo-1563805042-7684c019e1cb"},
+ {name:"Fresh Lemonade",cat:"Drinks",price:59,emoji:"🥤",
+ desc:"A refreshing citrus drink served chilled.",
+ img:"photo-1513558161293-cdaf765edfd7"}
+];
+let category="All",cart={},discountApplied=false;
+function money(n){return n.toFixed(2).replace(/\.00$/,"")}
+function renderMenu(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=foods.filter(f=>(category==="All"||f.cat===category)&&
+ f.name.toLowerCase().includes(q));
+ document.getElementById("foodGrid").innerHTML=list.map(f=>`
+ <article class="card">
+ <img src="https://images.unsplash.com/${f.img}?auto=format&fit=crop&w=700&q=80"
+ alt="${f.name}" loading="lazy" onerror="this.style.display='none'">
+ <div class="card-content">
+ <h3>${f.emoji} ${f.name}</h3>
+ <p>${f.desc}</p>
+ <div class="price-row"><span class="price">₹${f.price}</span>
+ <button onclick="addToCart('${f.name}')">+ Add</button></div>
+ </div></article>`).join("")||"<p>No dishes found. Try another search.</p>";
+}
+function setCategory(cat,btn){
+ category=cat;
+ document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");renderMenu();
+}
+function addToCart(name){cart[name]=(cart[name]||0)+1;updateCart()}
+function changeQty(name,amount){
+ cart[name]=(cart[name]||0)+amount;
+ if(cart[name]<=0)delete cart[name];
+ updateCart();showCart();
+}
+function subtotal(){return Object.keys(cart).reduce((s,n)=>
+ s+foods.find(f=>f.name===n).price*cart[n],0)}
+function updateCart(){
+ const count=Object.values(cart).reduce((a,b)=>a+b,0);
+ const sub=subtotal(),discount=discountApplied?Math.min(sub*.1,100):0;
+ document.getElementById("count").textContent=count;
+ document.getElementById("cartSummary").textContent=count+" items";
+ document.getElementById("total").textContent=money(sub-discount);
+}
+function applyOffer(){
+ discountApplied=true;updateCart();
+ document.getElementById("offerMessage").textContent=
+ "Offer applied to your cart! Discount is 10%, up to ₹100.";
+}
+function showCart(){
+ const el=document.getElementById("cartDetails");
+ el.style.display="block";
+ if(!Object.keys(cart).length){
+  el.innerHTML="<h2>Your Cart</h2><p>Your cart is empty. Add some delicious food!</p><button onclick=\"document.getElementById('menu').scrollIntoView()\">Browse Menu</button>";
+ }else{
+  const sub=subtotal(),discount=discountApplied?Math.min(sub*.1,100):0;
+  el.innerHTML="<h2>Your Cart 🛒</h2>"+
+  Object.keys(cart).map(n=>`<div class="cart-item"><span>${n}<br>₹${foods.find(f=>f.name===n).price} × ${cart[n]}</span><span><button onclick="changeQty('${n}',-1)">−</button> ${cart[n]} <button onclick="changeQty('${n}',1)">+</button></span></div>`).join("")+
+  `<p style="margin-top:15px">Subtotal: ₹${money(sub)}</p>`+
+  `<p>Discount: −₹${money(discount)}</p>`+
+  `<h3 style="margin:12px 0">Total: ₹${money(sub-discount)}</h3>`+
+  `<button onclick="checkout()">Place Order</button> <button onclick="document.getElementById('cartDetails').style.display='none'">Close</button>`;
+ }
+ el.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function checkout(){
+ alert("Demo checkout only. No real order or payment has been placed. Connect a backend and payment provider to accept orders.");
+}
+renderMenu();updateCart();
+</script>
+</body>
+</html>
