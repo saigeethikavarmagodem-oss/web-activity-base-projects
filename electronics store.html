@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ElectroStore - Electronics Shop</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6ff;
+            color: #172554;
+        }
+
+        header {
+            background: linear-gradient(90deg, #101d50, #263fa5);
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 5px;
+            color: #38d9ff;
+        }
+
+        nav {
+            background: #172554;
+            text-align: center;
+            padding: 16px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffd43b;
+        }
+
+        .banner {
+            background: linear-gradient(120deg,
+                #3157ed, #a855f7, #ec4899);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .banner h2 {
+            font-size: 38px;
+            margin: 10px;
+        }
+
+        .banner p {
+            font-size: 18px;
+        }
+
+        .shop-button {
+            display: inline-block;
+            background: #ffdf57;
+            color: #172554;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .shop-button:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .heading {
+            text-align: center;
+            color: #243b8a;
+            margin-top: 35px;
+        }
+
+        .filters {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .filters button {
+            background: #3157ed;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .filters button:hover {
+            background: #ec4899;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            padding: 25px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 18px #cbd5e1;
+            border: 1px solid #e0e7ff;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px #a5b4fc;
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .discount {
+            display: inline-block;
+            background: #ff354d;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .product h3 {
+            color: #243b8a;
+        }
+
+        .price {
+            color: #079447;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .stars {
+            color: #ffad00;
+        }
+
+        .product button {
+            background: linear-gradient(90deg, #1645ad, #3675ff);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .product button:hover {
+            background: #e83e8c;
+        }
+
+        .section {
+            background: white;
+            margin: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #dbe3f4;
+        }
+
+        .section h2 {
+            color: #3157ed;
+        }
+
+        .details {
+            background: linear-gradient(120deg,
+                #fff0f6, #eef2ff);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #3157ed;
+            color: white;
+        }
+
+        th, td {
+            border: 1px solid #dbe3f4;
+            padding: 13px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #eef2ff;
+        }
+
+        tr:hover {
+            background: #ffe4f0;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .benefit {
+            background: #e0f2fe;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .benefit:nth-child(even) {
+            background: #f3e8ff;
+        }
+
+        footer {
+            background: linear-gradient(90deg,
+                #101d50, #263fa5);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 35px;
+        }
+
+        footer a {
+            color: #67e8f9;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            nav a {
+                display: inline-block;
+                margin: 8px;
+            }
+
+            .banner h2 {
+                font-size: 28px;
+            }
+
+            .section {
+                margin: 12px;
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 550px;
+            }
+
+            .products {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚡ ElectroStore</h1>
+    <p>Smart Electronics | Better Living</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#comparison">Compare</a>
+    <a href="#details">Specifications</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="banner" id="home">
+    <span class="discount">SPECIAL OFFER</span>
+    <h2>Latest Electronics<br>at Best Prices!</h2>
+    <p>Laptops | Smartphones | Accessories | Smart Devices</p>
+    <a href="#products" class="shop-button">🛒 Shop Now →</a>
+</div>
+
+<h2 class="heading">✨ Shop by Category ✨</h2>
+
+<div class="filters">
+    <button onclick="filterProducts('all')">All Products</button>
+    <button onclick="filterProducts('laptop')">💻 Laptops</button>
+    <button onclick="filterProducts('phone')">📱 Smartphones</button>
+    <button onclick="filterProducts('accessory')">🎧 Accessories</button>
+    <button onclick="filterProducts('smart')">⌚ Smart Devices</button>
+</div>
+
+<h2 class="heading" id="products">🔥 Featured Products</h2>
+
+<div class="products">
+
+    <div class="product" data-category="laptop">
+        <span class="discount">20% OFF</span>
+        <img src="https://placehold.co/250x180/e0e7ff/243b8a?text=Laptop"
+             alt="Laptop">
+        <h3>Power Laptop</h3>
+        <p>Intel Core i5 | 8GB RAM | 512GB SSD</p>
+        <p class="stars">★★★★★ (4.5)</p>
+        <p class="price">₹45,000</p>
+        <p class="old-price">₹56,250</p>
+        <button onclick="showDetails('Power Laptop',
+        'Intel Core i5, 8GB RAM, 512GB SSD, 15.6-inch display')">
+            View Details
+        </button>
+    </div>
+
+    <div class="product" data-category="phone">
+        <span class="discount">15% OFF</span>
+        <img src="https://placehold.co/250x180/fce7f3/9d174d?text=Smartphone"
+             alt="Smartphone">
+        <h3>Smartphone X</h3>
+        <p>8GB RAM | 128GB Storage | OLED Display</p>
+        <p class="stars">★★★★★ (4.3)</p>
+        <p class="price">₹25,000</p>
+        <p class="old-price">₹29,400</p>
+        <button onclick="showDetails('Smartphone X',
+        '8GB RAM, 128GB storage, OLED display, fast charging')">
+            View Details
+        </button>
+    </div>
+
+    <div class="product" data-category="accessory">
+        <span class="discount">10% OFF</span>
+        <img src="https://placehold.co/250x180/dcfce7/166534?text=Headphones"
+             alt="Wireless headphones">
+        <h3>Wireless Headphones</h3>
+        <p>Bluetooth | Noise Reduction</p>
+        <p class="stars">★★★★☆ (4.3)</p>
+        <p class="price">₹1,800</p>
+        <p class="old-price">₹2,000</p>
+        <button onclick="showDetails('Wireless Headphones',
+        'Bluetooth connectivity, noise reduction, rechargeable battery')">
+            View Details
+        </button>
+    </div>
+
+    <div class="product" data-category="smart">
+        <span class="discount">12% OFF</span>
+        <img src="https://placehold.co/250x180/ede9fe/5b21b6?text=Smartwatch"
+             alt="Smartwatch">
+        <h3>Smart Watch</h3>
+        <p>Fitness Tracking | Heart Rate | Bluetooth</p>
+        <p class="stars">★★★★★ (4.4)</p>
+        <p class="price">₹3,500</p>
+        <p class="old-price">₹3,980</p>
+        <button onclick="showDetails('Smart Watch',
+        'Fitness tracking, heart-rate display, Bluetooth connectivity')">
+            View Details
+        </button>
+    </div>
+
+</div>
+
+<div class="section details" id="details">
+    <h2>📦 Product Specifications</h2>
+    <h3 id="detailName">Select a product</h3>
+    <p id="detailText">
+        Click View Details on any product to see its specifications.
+    </p>
+</div>
+
+<div class="section" id="comparison">
+    <h2>📊 Product Comparison</h2>
+
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Laptop</th>
+            <th>Smartphone</th>
+            <th>Smart Watch</th>
+        </tr>
+        <tr>
+            <td>RAM</td>
+            <td>8GB</td>
+            <td>8GB</td>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <td>Storage</td>
+            <td>512GB SSD</td>
+            <td>128GB</td>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <td>Display</td>
+            <td>15.6-inch</td>
+            <td>OLED</td>
+            <td>Touchscreen</td>
+        </tr>
+        <tr>
+            <td>Connectivity</td>
+            <td>Wi-Fi</td>
+            <td>Wi-Fi, Bluetooth</td>
+            <td>Bluetooth</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>₹45,000</td>
+            <td>₹25,000</td>
+            <td>₹3,500</td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <h2>💙 Why Shop With Us?</h2>
+
+    <div class="benefits">
+        <div class="benefit">
+            <h3>🚚 Free Shipping</h3>
+            <p>On eligible orders</p>
+        </div>
+
+        <div class="benefit">
+            <h3>🔒 Secure Shopping</h3>
+            <p>Safe shopping experience</p>
+        </div>
+
+        <div class="benefit">
+            <h3>🎁 Great Deals</h3>
+            <p>Discounts on selected products</p>
+        </div>
+
+        <div class="benefit">
+            <h3>🎧 Customer Support</h3>
+            <p>We are here to help</p>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="contact">
+    <h2>📞 Contact Us</h2>
+    <p>Email: support@electrostore.example</p>
+    <p>Phone: 9876543210</p>
+    <p>Address: Main Road, India</p>
+</div>
+
+<footer>
+    <h2>⚡ ElectroStore</h2>
+    <p>Smart Electronics | Better Living</p>
+    <p>
+        <a href="#home">Home</a> |
+        <a href="#products">Products</a> |
+        <a href="#comparison">Compare</a> |
+        <a href="#contact">Contact</a>
+    </p>
+    <p>© 2026 ElectroStore. All Rights Reserved.</p>
+</footer>
+
+<script>
+    function filterProducts(category) {
+        let products = document.querySelectorAll(".product");
+
+        products.forEach(function(product) {
+            if (category === "all" ||
+                product.dataset.category === category) {
+                product.style.display = "block";
+            } else {
+                product.style.display = "none";
+            }
+        });
+    }
+
+    function showDetails(name, description) {
+        document.getElementById("detailName").textContent = name;
+        document.getElementById("detailText").textContent = description;
+
+        document.getElementById("details").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+</script>
+
+</body>
+</html>
